@@ -103,3 +103,8 @@ traces = None
 
 key = None
 print("".join([chr(c) for c in key]))
+
+
+# Combien de traces (environ) sont reellement necessaires pour trouver la clé
+# Faire le code pour créer une figure pour le mettre en evidence
+
