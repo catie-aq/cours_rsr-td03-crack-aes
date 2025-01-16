@@ -5,7 +5,7 @@ import numpy as np
 import pickle
 
 # Importer la sbox : utiliser le sbox.txt ou le sbox.pickle (plus simple)
-sbox = None
+sbox = pickle.load(open("data/sbox.pickle", "rb"))
 
 # Creer une fonction AES simplifiée (XOR + substitution par s-box)
 # En entrée : 1 octet de la clé et 1 octet de texte à chiffrer
@@ -75,31 +75,35 @@ plt.show()
 # Qu'observe t-on ? Comment expliquer ce resultat ?
 
 ####
-# Nous avons chiffré 1000 textes aléatoires de 32 octets à l'aide d'une clé AES de 32 octets
-# Nous avons pour chaque texte clair calculé le hammer weight (~consommation)
+# SIMULATION :
+# Nous avons dechiffré 1000 textes de 32 octets à l'aide d'une clé AES de 32 octets
+# Nous avons pour chaque texte calculé le hammer weight (~consommation)
 # Retrouvez la clé !
-# traces : tableau de couples (texte_clair, consommation)
-# texte_clair : 32 octets aléatoires
+# traces : tableau de couples (texte, consommation)
+# texte : 32 octets
 # consommation : 32 entiers (hammer weight) representant la consommation
 ####
 
 l = 32
-traces = None
+traces = pickle.load(open("data/sim_traces.pickle", "rb"))
 
 key = None
 print("".join([chr(c) for c in key]))
 
-# Dans la réalité il est difficile de savoir à quel moment (indice du tableau de trace)
+
+
+key = None
+print("".join([chr(c) for c in key]))
+
+# VRAIES TRACES
+# Ouvrir les vraies traces (même format que les sim_traces)
+# Appliquer le même pricipe qu'avant pour trouver la clé
+# Attention : dans la réalité il est impossible de savoir à quel moment (indice du tableau de trace)
 # a réellement eu lieu la sortie de la fonction de substitution.
+# Dans le cas ou votre algo précédent utilise cette information :
 # Trouver une solution pour retrouver la clé sans avoir l'information de la position dans la trace.
 
-key = None
-print("".join([chr(c) for c in key]))
-
-# Ouvrir les vraies traces
-# Appliquer le même pricipe qu'avant pour trouver la clé
-
-traces = None
+traces = pickle.load(open("data/real_traces.pickle", "rb"))
 
 key = None
 print("".join([chr(c) for c in key]))
