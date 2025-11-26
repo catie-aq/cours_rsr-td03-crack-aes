@@ -9,4 +9,4 @@
     - les reponses aux questions posées dans le .py
     - plots & screenshots de vos resultats
 
-Code + rapport à remettre par mail
+Code python dans un .zip + rapport à remettre par mail
