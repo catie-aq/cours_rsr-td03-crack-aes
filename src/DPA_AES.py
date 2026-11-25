@@ -90,7 +90,9 @@ key = None
 print("".join([chr(c) for c in key]))
 
 # VRAIES TRACES
-# Ouvrir les vraies traces (même format que les sim_traces)
+# Ouvrir les vraies traces : tableau de couples (texte, consommation)
+# texte : 32 octets
+# consommation : courbe de 7000 mesures (une trace par chiffrement)
 # Appliquer le même principe qu'avant pour trouver la clé
 # Attention : dans la réalité il est impossible de savoir à quel moment (indice du tableau de trace)
 # a réellement eu lieu la sortie de la fonction de substitution.
