@@ -46,7 +46,8 @@ consos = None
 # On va donc supposer une valeur de clé "guess" :
 guess = None
 
-# Trier les "traces" en fonction de l'un des bits du résultat du chiffrement par la clé supposée (guess)
+# Séparer les consommations (consos) en deux groupes selon le bit de poids faible (bit 0) du résultat
+# du chiffrement par la clé supposée (guess) : zeros quand ce bit vaut 0, ones quand il vaut 1
 zeros = None
 ones = None
 
@@ -54,7 +55,7 @@ ones = None
 m0 = None
 m1 = None
 
-# Calculer la différence entre les consommations moyennes
+# Calculer la différence entre les consommations moyennes : diff = m1 - m0
 diff = None
 print(diff)
 
@@ -70,13 +71,16 @@ plt.show()
 
 # Qu'observe-t-on ?
 
-# Essayer en enlevant la substitution de la fonction AES tronquée
+# Écrire une variante de la fonction AES simplifiée sans la substitution (XOR seul),
+# sans modifier aes() : les assert en dépendent.
+# Refaire avec elle les étapes ci-dessus (consommations, puis diffs pour chaque guess).
 # Qu'observe-t-on ? Comment expliquer ce résultat ?
 
 ####
 # SIMULATION :
-# Nous avons chiffré 1000 textes de 32 octets à l'aide d'une clé AES de 32 octets
-# Nous avons pour chaque texte calculé le Hamming weight (~consommation)
+# Nous avons chiffré 1000 textes de 32 octets avec une clé de 32 octets,
+# octet par octet, avec la fonction AES simplifiée de la partie 1
+# Pour chaque octet, nous avons calculé le Hamming weight du résultat (~consommation)
 # Retrouvez la clé !
 # traces : tableau de couples (texte, consommation)
 # texte : 32 octets
@@ -92,12 +96,16 @@ print("".join([chr(c) for c in key]))
 # VRAIES TRACES
 # Ouvrir les vraies traces : tableau de couples (texte, consommation)
 # texte : 32 octets
-# consommation : courbe de 7000 mesures (une trace par chiffrement)
-# Appliquer le même principe qu'avant pour trouver la clé
-# Attention : dans la réalité il est impossible de savoir à quel moment (indice du tableau de trace)
+# consommation : courbe de 7000 mesures (une trace par chiffrement), avec du bruit
+# Commencer par tracer quelques courbes pour voir à quoi ressemble une mesure.
+# Appliquer le même principe qu'avant pour trouver la clé.
+# Attention : dans la réalité il est impossible de savoir à quel moment (indice dans la courbe)
 # a réellement eu lieu la sortie de la fonction de substitution.
-# Dans le cas où votre algo précédent utilise cette information :
-# Trouver une solution pour retrouver la clé sans avoir l'information de la position dans la trace.
+# Votre algorithme précédent utilisait cette information : il faut l'adapter.
+# Indice : pour un octet et un guess, calculer la différence des moyennes non plus sur une valeur
+# mais sur chaque point de la courbe (numpy : moyenne sur l'axe 0). Pour la bonne clé, un pic apparaît.
+# Le signe du pic dépend de la mesure : comparer des valeurs absolues.
+# Retrouver d'abord le premier octet de la clé, puis généraliser aux 32.
 
 traces = pickle.load(open("data/real_traces.pickle", "rb"))
 
@@ -105,6 +113,8 @@ key = None
 print("".join([chr(c) for c in key]))
 
 
-# Combien de traces (environ) sont réellement nécessaires pour trouver la clé
-# Faire le code pour créer une figure pour le mettre en évidence
+# Combien de traces (environ) sont réellement nécessaires pour retrouver la clé complète ?
+# Refaire l'attaque avec les N premières traces, pour quelques valeurs de N (100, 200, ..., 1000),
+# et tracer le nombre d'octets justes en fonction de N.
+# Une attaque complète prend quelques dizaines de secondes : limiter le nombre de valeurs de N.
 
