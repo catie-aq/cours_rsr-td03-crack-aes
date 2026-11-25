@@ -46,7 +46,7 @@ consos = None
 # On va donc supposer une valeur de clé "guess" :
 guess = None
 
-# Séparer les "traces" en deux groupes selon le bit de poids faible (bit 0) du résultat
+# Séparer les consommations (consos) en deux groupes selon le bit de poids faible (bit 0) du résultat
 # du chiffrement par la clé supposée (guess) : zeros quand ce bit vaut 0, ones quand il vaut 1
 zeros = None
 ones = None
@@ -55,7 +55,7 @@ ones = None
 m0 = None
 m1 = None
 
-# Calculer la différence entre les consommations moyennes
+# Calculer la différence entre les consommations moyennes : diff = m1 - m0
 diff = None
 print(diff)
 
@@ -78,8 +78,9 @@ plt.show()
 
 ####
 # SIMULATION :
-# Nous avons chiffré 1000 textes de 32 octets à l'aide d'une clé AES de 32 octets
-# Nous avons pour chaque texte calculé le Hamming weight (~consommation)
+# Nous avons chiffré 1000 textes de 32 octets avec une clé de 32 octets,
+# octet par octet, avec la fonction AES simplifiée de la partie 1
+# Pour chaque octet, nous avons calculé le Hamming weight du résultat (~consommation)
 # Retrouvez la clé !
 # traces : tableau de couples (texte, consommation)
 # texte : 32 octets
@@ -113,5 +114,7 @@ print("".join([chr(c) for c in key]))
 
 
 # Combien de traces (environ) sont réellement nécessaires pour retrouver la clé complète ?
-# Tracer le nombre d'octets justes en fonction du nombre de traces utilisées.
+# Refaire l'attaque avec les N premières traces, pour quelques valeurs de N (100, 200, ..., 1000),
+# et tracer le nombre d'octets justes en fonction de N.
+# Une attaque complète prend quelques dizaines de secondes : limiter le nombre de valeurs de N.
 

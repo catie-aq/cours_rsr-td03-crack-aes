@@ -11,6 +11,8 @@ pip install -r requirements.txt
 python src/DPA_AES.py
 ```
 
+Au premier lancement, le script s'arrête sur le premier `assert` : c'est normal, c'est à vous de compléter les fonctions.
+
 ## À faire
 
 - Compléter le fichier python en suivant les instructions
