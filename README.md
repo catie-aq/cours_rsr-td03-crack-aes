@@ -1,10 +1,23 @@
 # TD Crack AES
 
+## Démarrer
+
+Depuis la racine du dépôt (les chemins `data/...` sont relatifs à elle) :
+
+```
+python3 -m venv env
+source env/bin/activate        # Windows : env\Scripts\activate
+pip install -r requirements.txt
+python src/DPA_AES.py
+```
+
+## À faire
+
 - Compléter le fichier python en suivant les instructions
 - Écrire un rapport contenant :
     - un compte rendu du travail réalisé
         - résultat
-        - combien de traces sont nécessaires pour arriver à trouver la clé (plot fortement recommandé)
+        - combien de traces sont nécessaires pour retrouver la clé complète (figure : nombre d'octets justes en fonction du nombre de traces)
         - comment améliorer les résultats ?
     - les réponses aux questions posées dans le .py
     - plots & screenshots de vos résultats
